@@ -8,7 +8,7 @@
             .success(function (data) {
                 $scope.data.products = data;
             })
-            .error(function (error) {
+            .error(function (error) { // 当加载数据出错时显示提示信息
                 $scope.data.error = error;
             });
     });
