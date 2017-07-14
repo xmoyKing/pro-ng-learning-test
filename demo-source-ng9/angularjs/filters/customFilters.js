@@ -1,7 +1,8 @@
 ﻿/// <reference path="../angular.js" />
 
-angular.module("customFilters", []) // 定义customFilters模块，作为过滤器集合
-.filter("unique", function () { // 返回data中所有唯一的propertyName属性数组
+
+angular.module("customFilters", [])
+.filter("unique", function () {
     return function (data, propertyName) {
         if (angular.isArray(data) && angular.isString(propertyName)) {
             var results = [];
@@ -19,22 +20,21 @@ angular.module("customFilters", []) // 定义customFilters模块，作为过滤�
         }
     }
 })
-.filter("range", function ($filter) { // 获取指定区间的索引数目，以数组形式返回
+.filter("range", function ($filter) {
     return function (data, page, size) {
         if (angular.isArray(data) && angular.isNumber(page) && angular.isNumber(size)) {
-            var start_index = (page - 1) * size; // 获取本页面开始的产品索引数
+            var start_index = (page - 1) * size;
             if (data.length < start_index) {
                 return [];
             } else {
-                // $filter("limitTo")(input, size)方法，选取input数组中的前size个记录，
-                return $filter("limitTo")(data.splice(start_index), size);                 
+                return $filter("limitTo")(data.splice(start_index), size);
             }
         } else {
             return data;
         }
     }
 })
-.filter("pageCount", function () { // 根据data和size，计算页面总数
+.filter("pageCount", function () {
     return function (data, size) {
         if (angular.isArray(data)) {
             var result = [];
@@ -47,3 +47,4 @@ angular.module("customFilters", []) // 定义customFilters模块，作为过滤�
         }
     }
 });
+
