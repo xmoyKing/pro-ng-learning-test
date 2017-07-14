@@ -1,9 +1,9 @@
 ﻿angular.module("sportsStore")
-    .constant("dataUrl", "http://localhost:5500/products")
+    .constant("dataUrl", "products.json") // 定义常量，此处的products.json可以改为某个url接口
     .controller("sportsStoreCtrl", function ($scope, $http, dataUrl) {
 
         $scope.data = {};
-
+        // 使用http服务将模型加载到应用内
         $http.get(dataUrl)
             .success(function (data) {
                 $scope.data.products = data;

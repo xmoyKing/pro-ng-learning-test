@@ -1,0 +1,28 @@
+[{  
+    "id": "ID1",
+    "name": "Product #1",
+    "description": "A product",
+    "category": "Category #1", 
+    "price": 100
+},
+{
+    "id": "ID2",
+    "name": "Product #2", 
+    "description": "A product",
+    "category": "Category #1", 
+    "price": 110
+},
+{
+    "id": "ID3",
+    "name": "Product #3", 
+    "description": "A product",
+    "category": "Category #2", 
+    "price": 210
+},
+{
+    "id": "ID4",
+    "name": "Product #4", 
+    "description": "A product",
+    "category": "Category #3", 
+    "price": 202
+}]

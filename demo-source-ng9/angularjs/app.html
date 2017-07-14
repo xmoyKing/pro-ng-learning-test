@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html ng-app="sportsStore">
 <head>
     <title>SportsStore</title>
@@ -8,7 +9,7 @@
     <script>
         angular.module("sportsStore", ["customFilters", "cart", "ngRoute"])
         .config(function ($routeProvider) {
-
+            // 定义每个路由路径对应的局部视图
             $routeProvider.when("/complete", {
                 templateUrl: "/views/thankYou.html"
             });
@@ -40,12 +41,13 @@
 <body ng-controller="sportsStoreCtrl">
     <div class="navbar navbar-inverse">
         <a class="navbar-brand" href="#">SPORTS STORE</a>
-        <cart-summary />
+        <cart-summary /> <!-- 自定义指令cart-summary -->
     </div>
+    <!-- 错误提示框，当出现错误时显示错误信息  -->
     <div class="alert alert-danger" ng-show="data.error">
         Error ({{data.error.status}}). The product data was not loaded.
         <a href="/app.html" class="alert-link">Click here to try again</a>
     </div>
-    <ng-view />
+    <ng-view />   <!-- 加载局部视图的指令  -->
 </body>
 </html>
