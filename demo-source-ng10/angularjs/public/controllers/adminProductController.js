@@ -1,5 +1,5 @@
 ﻿angular.module("sportsStoreAdmin")
-.constant("productUrl", "http://localhost:5500/products/")
+.constant("productUrl", "/products/")
 .config(function($httpProvider) {
     $httpProvider.defaults.withCredentials = true;
 })
