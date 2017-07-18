@@ -4,12 +4,15 @@
     <title>Administration</title>
     <script src="angular.js"></script>
     <script src="ngmodules/angular-route.js"></script>
+    <!-- 添加resource插件，用于RESTful风格的CRUD操作 -->
     <script src="ngmodules/angular-resource.js"></script>
     <link href="bootstrap.css" rel="stylesheet" />
     <link href="bootstrap-theme.css" rel="stylesheet" />
     <script>
+        // 定义新的管理模块，同时需要使用到路由和RESTful插件
         angular.module("sportsStoreAdmin", ["ngRoute", "ngResource"])
             .config(function ($routeProvider) {
+                // 配置路由和视图
 
                 $routeProvider.when("/login", {
                     templateUrl: "/views/adminLogin.html"

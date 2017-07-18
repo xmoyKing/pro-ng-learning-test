@@ -5,12 +5,12 @@ var server = deployd({
   port: process.env.PORT || 5000,
   env: 'demo',
   db: {
-    host: 'ds161960.mlab.com',
-    port: 61960,
-    name: 'dbking',
+    host: 'host',
+    port: 'dbport',
+    name: 'dbname',
     credentials: {
-      username: 'king',
-      password: 'xmoy8427'
+      username: 'username',
+      password: 'password'
     }
   }
 });

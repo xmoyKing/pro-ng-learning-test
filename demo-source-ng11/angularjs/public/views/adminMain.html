@@ -1,4 +1,5 @@
-﻿<div class="panel panel-default row" ng-controller="mainCtrl">
+﻿<!-- 后台主页面 -->
+<div class="panel panel-default row" ng-controller="mainCtrl">
     <div class="col-xs-3 panel-body">
         <a ng-repeat="item in screens" class="btn btn-block btn-default"
            ng-class="{'btn-primary': item == current }" ng-click="setScreen($index)">

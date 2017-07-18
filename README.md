@@ -19,3 +19,6 @@ AngularJS高级程序设计学习demo源码集
 # demo-source-ng10
 [博客地址：angularjs入门笔记-10-使用deployd作为服务器，增加订单功能](https://xmoyking.github.io/2017/05/11/angularjs10/)
 
+
+# demo-source-ng11
+[博客地址：angularjs入门笔记-11-后台管理系统](https://xmoyking.github.io/2017/05/14/angularjs11/)
