@@ -5,12 +5,12 @@ var server = deployd({
   port: process.env.PORT || 5000,
   env: 'demo',
   db: {
-    host: 'host',
-    port: 'dbport',
-    name: 'dbname',
+    host: 'host', // 远程mongodb域名或ip
+    port: 'dbport', // 数据库端口
+    name: 'dbname', // 数据库名
     credentials: {
-      username: 'username',
-      password: 'password'
+      username: 'username', // 数据库用户名
+      password: 'password' // 数据库密码
     }
   }
 });
