@@ -1,4 +1,4 @@
-angular.module("sportsStore")
+﻿angular.module("sportsStore")
     .constant("productListActiveClass", "btn-primary")
     .constant("productListPageCount", 3)
     .controller("productListCtrl", function ($scope, $filter,
