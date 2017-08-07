@@ -1,0 +1,30 @@
+<form ng-controller="loginCtrl">
+    <div class="form-group"  ng-hide="model.register">
+        <label for="region">宿舍区域</label>
+        <select class="form-control" id="region" ng-model="model.region">
+            <option value="文星">文星</option>
+            <option value="文荟">文荟</option>
+            <option value="文萃">文萃</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>姓名</label>
+        <input type="text" class="form-control" placeholder="请输入姓名" ng-model="model.user.username" required>
+    </div>
+
+    <div class="form-group" ng-if="model.register">
+        <label>电话</label>
+        <input type="tel" class="form-control" placeholder="请输入手机号码" ng-model="model.user.tel" required>
+    </div>
+
+    <div class="form-group">
+        <label>密码</label>
+        <input type="password" class="form-control" placeholder="请输入密码" ng-model="model.user.password" required>
+    </div>
+
+    <div class="text-right">
+        <label class="checkbox-inline checkbox"><input type="checkbox" ng-model=" model.register">注册</label>
+        <button type="submit" class="btn btn-primary" ng-click="comfirm()">{{ model.register?'确定注册':'登录'}}</button>
+    </div>
+</form>

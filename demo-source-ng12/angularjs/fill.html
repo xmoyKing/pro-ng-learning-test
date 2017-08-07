@@ -1,0 +1,40 @@
+<div class="form-group">
+    <label class="control-label">{{model.user.name}},欢迎你~ 当前区域为{{model.region}}</label>
+</div>
+
+<form  ng-show="fillForm">
+    <div class="form-group">
+        <label for="tel">电话</label>
+        <input type="tel" class="form-control" id="tel" placeholder="请输入手机号码" ng-model="model.tel" required>
+    </div>
+    <div class="form-group">
+        <label for="address">地址</label>
+        <input type="text" class="form-control" id="address" placeholder="请输入地址" ng-model="model.address" required>
+    </div>
+    <div class="text-right">
+        <button type="submit" class="btn btn-primary" ng-click="addNewItem()">确定</button>
+    </div>
+</form>
+
+<table class="table" ng-show="allNeeded">
+    <caption>当前需配送</caption>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>地址</th>
+            <th>电话</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in model.needed | orderBy:'address'">
+            <td>{{$index + 1}}</td>
+            <td>{{item.address}}</td>
+            <td>{{item.tel}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="checkbox-inline checkbox">
+    <label><input type="checkbox" ng-init="fillForm=true" ng-model="fillForm"> 填表入库</label>
+    <label><input type="checkbox" ng-init="allNeeded=false" ng-model="allNeeded"> 需要配送</label>
+</div>

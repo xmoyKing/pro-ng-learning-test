@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh_cn" data-ng-app="delivery">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="./bootstrap.min.css">
+        <link rel="stylesheet" href="./sweetalert.css">
+
+        <script src="./jquery.min.js"></script>
+        <script src="./sweetalert.min.js"></script>
+        <script src="./angular.min.js"></script>
+        <script src="./angular-route.js"></script>
+ <script> 
+
+    var delivery = angular.module("delivery", ["ngRoute"],function ($httpProvider) {
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';  
+        $httpProvider.defaults.headers.post['Accept'] = 'application/json, text/javascript, */*; q=0.01';  
+        $httpProvider.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest';  
+    });
+
+    delivery.config(function ($routeProvider ) {
+
+        $routeProvider.when('/fill', {
+            templateUrl: '/fill.html'
+        });
+
+        $routeProvider.when('/delivery', {
+            templateUrl: '/delivery.html'
+        });
+
+        $routeProvider.otherwise({
+            templateUrl: "/login.html"
+        });
+    });
+
+    // 登录页面ctrl
+    delivery.controller('loginCtrl',function ($scope, $http, $location) {
+
+        $scope.comfirm = function () {
+            if($scope.model.register){
+                console.log('注册')
+
+                $.post('/Delivery/user',$scope.model.user,function (res) {
+                        if(res.status == 1){
+                            swal('', '注册成功，请登录', 'success');
+                            $location.path('/');
+                        }else{
+                            swal('', res.message.zh, 'error');
+                        }
+                });
+
+                $http.post('/Delivery/user',$scope.model.user)
+                .then(function successCallback(res) {
+                    res.message = JSON.parse(res.message);
+
+                        if(res.status == 1){
+                            swal('', '注册成功，请登录', 'success');
+                            $location.path('/');
+                        }else{
+                            swal('', res.message.zh, 'error');
+                        }
+                    }, function errorCallback(res) {
+                        res.message = JSON.parse(res.message);
+                        // 请求失败执行代码
+                        swal('',res.message.zh, 'error');
+                });
+ 
+            }else{
+                console.log('登录')
+
+                if(!$scope.model.region){
+                    // $scope.model.error.message = '请填写宿舍区域';
+                    return false;
+                }
+                
+                $scope.model.needed = [
+                    {
+                    "address": "suzhuo",
+                    "id": "1",
+                    "inTime": "2017-08-06 13:24:45.0",
+                    "status": "payed",
+                    "tel": "18896987787"
+                    },
+                    {
+                    "address": "hangzhou",
+                    "id": "2",
+                    "inTime": "2017-08-06 14:00:42.0",
+                    "status": "payed",
+                    "tel": "18896988888"
+                    }
+                    ];
+
+                if($scope.model.user.name == 'fill'){
+                    $location.path('/fill');
+                }else if($scope.model.user.name == 'delivery'){
+                    $location.path('/delivery');
+                }
+                
+            }
+
+        };
+    })
+    
+    // 总ctrl
+    delivery.controller('deliveryCtrl', function ($scope, $http, $location) {
+        $scope.model = {
+            region: '',
+            user: {
+                name: '' /* 用户名 */
+            },
+            needed: [],
+            crt: [],
+        };
+
+        if(!$scope.model.user.name){
+            $location.path('/');
+        }
+
+        // 填表
+        $scope.addNewItem = function () {
+            $scope.model.needed.push({ address: $scope.model.address, tel: $scope.model.tel, done: false });
+            $scope.model.address =  $scope.model.tel = '';
+        }
+
+        // 配送
+        $scope.deliverIt = function (i) {
+            // 将该项插入到当前配送数组中
+            $scope.model.crt.push({ address: $scope.model.needed[i].address, tel:  $scope.model.needed[i].tel, done: false });
+            $scope.model.needed.splice(i,1); // 在需配送数组中删除该项
+        }
+
+        // 取消配送
+        $scope.removeFromCrt = function (i) {
+            // 将该项插回到需配送数组中
+            $scope.model.needed.push({ address: $scope.model.crt[i].address, tel:  $scope.model.crt[i].tel});
+            $scope.model.crt.splice(i,1); // 在当前配送数组中删除该项
+        }
+    });
+
+</script>
+    </head>
+    <body>
+        <div class="container" ng-controller="deliveryCtrl">
+            <ng-view /> 
+        </div>
+    </body>
+</html>

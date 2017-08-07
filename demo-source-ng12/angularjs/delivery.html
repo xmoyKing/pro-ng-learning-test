@@ -1,0 +1,50 @@
+<div class="form-group">
+    <label class="control-label">{{model.user.name}},欢迎你~ 当前区域为{{model.region}}</label>
+</div>
+
+<div class="checkbox-inline checkbox">
+    <label><input type="checkbox" ng-init="myDelivery=true" ng-model="myDelivery"> 我的任务</label>
+    <label><input type="checkbox" ng-init="allNeeded=true" ng-model="allNeeded"> 全部任务</label>
+</div>
+
+<table class="table" ng-show="myDelivery">
+    <caption>我的配送</caption>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>地址</th>
+            <th>电话</th>
+            <th>是否取消</th>
+            <th>是否完成</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in model.crt | orderBy:'address'">
+            <td>{{$index + 1}}</td>
+            <td>{{item.address}}</td>
+            <td>{{item.tel}}</td>
+            <td><button type="button" class="btn btn-default" ng-click="removeFromCrt($index)">取消</button></td>
+            <td><button type="button" class="btn btn-default" ng-click="done($index)">完成</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="table" ng-show="allNeeded">
+    <caption>当前需配送</caption>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>地址</th>
+            <th>电话</th>
+            <th>是否配送</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in model.needed | orderBy:'address'">
+            <td>{{$index + 1}}</td>
+            <td>{{item.address}}</td>
+            <td>{{item.tel}}</td>
+            <td><button type="button" class="btn btn-default" ng-click="deliverIt($index)">配送</button></td>
+        </tr>
+    </tbody>
+</table>
